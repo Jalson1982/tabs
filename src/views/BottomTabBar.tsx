@@ -501,6 +501,10 @@ const styles = StyleSheet.create({
   tabBar: {
     borderTopWidth: StyleSheet.hairlineWidth,
     flexDirection: 'row',
+    position:'absoulute',
+    bottom:0,
+    left:0,
+    right:0
   },
   tabBarLight: {
     backgroundColor: ThemeColors.light.header,
