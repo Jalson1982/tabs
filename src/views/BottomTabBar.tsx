@@ -114,25 +114,9 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
     visible: new Animated.Value(1),
   };
 
-  componentDidMount() {
-    if (Platform.OS === 'ios') {
-      Keyboard.addListener('keyboardWillShow', this._handleKeyboardShow);
-      Keyboard.addListener('keyboardWillHide', this._handleKeyboardHide);
-    } else {
-      Keyboard.addListener('keyboardDidShow', this._handleKeyboardShow);
-      Keyboard.addListener('keyboardDidHide', this._handleKeyboardHide);
-    }
-  }
+  componentDidMount() {}
 
-  componentWillUnmount() {
-    if (Platform.OS === 'ios') {
-      Keyboard.removeListener('keyboardWillShow', this._handleKeyboardShow);
-      Keyboard.removeListener('keyboardWillHide', this._handleKeyboardHide);
-    } else {
-      Keyboard.removeListener('keyboardDidShow', this._handleKeyboardShow);
-      Keyboard.removeListener('keyboardDidHide', this._handleKeyboardHide);
-    }
-  }
+  componentWillUnmount() {}
 
   // @ts-ignore
   context: 'light' | 'dark';
@@ -443,26 +427,10 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
     ];
 
     return (
-      <Animated.View
+      <View
         style={[
           styles.container,
-          containerStyle,
-          keyboardHidesTabBar
-            ? {
-                // When the keyboard is shown, slide down the tab bar
-                transform: [
-                  {
-                    translateY: this.state.visible.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [this.state.layout.height, 0],
-                    }),
-                  },
-                ],
-                // Absolutely position the tab bar so that the content is below it
-                // This is needed to avoid gap at bottom when the tab bar is hidden
-                position: this.state.keyboard ? 'absolute' : position,
-              }
-            : null,
+          containerStyle
         ]}
         pointerEvents={
           keyboardHidesTabBar && this.state.keyboard ? 'none' : 'auto'
@@ -521,7 +489,7 @@ class TabBarBottom extends React.Component<BottomTabBarProps, State> {
             );
           })}
         </SafeAreaView>
-      </Animated.View>
+      </View>
     );
   }
 }
